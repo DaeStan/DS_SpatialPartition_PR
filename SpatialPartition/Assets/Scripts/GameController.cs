@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +29,7 @@ namespace SpatialPartitionPattern
         List<Soldier> closestEnemies = new List<Soldier>();
 
         //Grid data
-        float mapWidth = 50f;
+        float mapWidth = 10f;
         int cellSize = 10;
 
         //Number of soldiers on each team
@@ -44,7 +46,13 @@ namespace SpatialPartitionPattern
 
         void Start()
         {
-            //Create a new grid
+
+            GameObject ground = GameObject.Find("Ground");
+
+            ground.transform.localScale = new Vector3(1, 1, 1);
+            ground.transform.position = new Vector3(5, 0, 5);
+
+            //Create a new gris
             grid = new Grid((int)mapWidth, cellSize);
 
             //Add random enemies and friendly and store them in a list
@@ -156,6 +164,129 @@ namespace SpatialPartitionPattern
         public void OnButtonClick()
         {
             SpaticalParitionToggle = !SpaticalParitionToggle;
+        }
+
+        public void OnGridChange2()
+        {
+            mapWidth = 100f;
+
+            GameObject ground = GameObject.Find("Ground");
+
+            ground.transform.localScale = new Vector3(10, 1, 10);
+            ground.transform.position = new Vector3(50, 0, 50);
+
+            grid = new Grid((int)mapWidth, cellSize);
+
+
+            //Add random enemies and friendly and store them in a list
+            for (int i = 0; i < numberOfSoldiers; i++)
+            {
+                //Give the enemy a random position
+                Vector3 randomPos = new Vector3(Random.Range(0f, mapWidth), 0.5f, Random.Range(0f, mapWidth));
+
+                //Create a new enemy
+                GameObject newEnemy = Instantiate(enemyObj, randomPos, Quaternion.identity) as GameObject;
+
+                //Add the enemy to a list
+                enemySoldiers.Add(new Enemy(newEnemy, mapWidth, grid));
+
+                //Parent it
+                newEnemy.transform.parent = enemyParent;
+
+
+                //Give the friendly a random position
+                randomPos = new Vector3(Random.Range(0f, mapWidth), 0.5f, Random.Range(0f, mapWidth));
+
+                //Create a new friendly
+                GameObject newFriendly = Instantiate(friendlyObj, randomPos, Quaternion.identity) as GameObject;
+
+                //Add the friendly to a list
+                friendlySoldiers.Add(new Friendly(newFriendly, mapWidth));
+
+                //Parent it 
+                newFriendly.transform.parent = friendlyParent;
+            }
+        }
+
+        public void OnGridChange3()
+        {
+            mapWidth = 200f;
+
+            GameObject ground = GameObject.Find("Ground");
+            ground.transform.localScale = new Vector3(20, 1, 20);
+            ground.transform.position = new Vector3(100, 0, 100);
+
+            grid = new Grid((int)mapWidth, cellSize);
+
+            //Add random enemies and friendly and store them in a list
+            for (int i = 0; i < numberOfSoldiers; i++)
+            {
+                //Give the enemy a random position
+                Vector3 randomPos = new Vector3(Random.Range(0f, mapWidth), 0.5f, Random.Range(0f, mapWidth));
+
+                //Create a new enemy
+                GameObject newEnemy = Instantiate(enemyObj, randomPos, Quaternion.identity) as GameObject;
+
+                //Add the enemy to a list
+                enemySoldiers.Add(new Enemy(newEnemy, mapWidth, grid));
+
+                //Parent it
+                newEnemy.transform.parent = enemyParent;
+
+
+                //Give the friendly a random position
+                randomPos = new Vector3(Random.Range(0f, mapWidth), 0.5f, Random.Range(0f, mapWidth));
+
+                //Create a new friendly
+                GameObject newFriendly = Instantiate(friendlyObj, randomPos, Quaternion.identity) as GameObject;
+
+                //Add the friendly to a list
+                friendlySoldiers.Add(new Friendly(newFriendly, mapWidth));
+
+                //Parent it 
+                newFriendly.transform.parent = friendlyParent;
+            }
+        }
+
+        public void OnGridChange1()
+        {
+            mapWidth = 50f;
+
+            GameObject ground = GameObject.Find("Ground");
+
+            ground.transform.localScale = new Vector3(5, 1, 5);
+            ground.transform.position = new Vector3(25, 0, 25);
+
+            grid = new Grid((int)mapWidth, cellSize);
+
+            //Add random enemies and friendly and store them in a list
+            for (int i = 0; i < numberOfSoldiers; i++)
+            {
+                //Give the enemy a random position
+                Vector3 randomPos = new Vector3(Random.Range(0f, mapWidth), 0.5f, Random.Range(0f, mapWidth));
+
+                //Create a new enemy
+                GameObject newEnemy = Instantiate(enemyObj, randomPos, Quaternion.identity) as GameObject;
+
+                //Add the enemy to a list
+                enemySoldiers.Add(new Enemy(newEnemy, mapWidth, grid));
+
+                //Parent it
+                newEnemy.transform.parent = enemyParent;
+
+
+                //Give the friendly a random position
+                randomPos = new Vector3(Random.Range(0f, mapWidth), 0.5f, Random.Range(0f, mapWidth));
+
+                //Create a new friendly
+                GameObject newFriendly = Instantiate(friendlyObj, randomPos, Quaternion.identity) as GameObject;
+
+                //Add the friendly to a list
+                friendlySoldiers.Add(new Friendly(newFriendly, mapWidth));
+
+                //Parent it 
+                newFriendly.transform.parent = friendlyParent;
+            }
         }
     }
 }

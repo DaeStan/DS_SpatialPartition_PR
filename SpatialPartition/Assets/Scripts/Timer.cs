@@ -16,7 +16,7 @@ namespace SpatialPartitionPattern
         void Update()
         {
             float Timer = GameController.Timer;
-            TimeText.text = Timer.ToString("F5");
+            TimeText.text = Timer.ToString("F5") + (" ms");
         }
     }
 }
